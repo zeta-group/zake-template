@@ -1,1 +1,8 @@
 // Debug-only stuff.
+
+class MyDebugThing {    
+    label Spawn {
+        invisi A_Log("Very debuggy!");
+        stop;
+    };
+}

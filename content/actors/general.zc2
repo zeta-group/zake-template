@@ -1,1 +1,35 @@
 // Actor definitions that don't fall anywhere else.
+
+class LiteralDummy {
+    is CORPSE;
+    is SHOOTABLE;
+    is INVULNERABLE;
+    is ALLOWPAIN;
+    is BOUNCEONWALLS;
+
+    set Mass to 100;
+
+    macro ThrustUp(force) {
+        invisi ThrustThingZ(0, force, 0, 1);
+    };
+
+    macro ThrustDown(force) {
+        invisi ThrustThingZ(0, force, 1, 1);
+    };
+
+    label Spawn {
+        DUMM A -1;
+        stop;
+    };
+
+    label Pain {
+        sometimes 60 inject ThrustUp(3);
+        DUMM B 5 A_PlaySound("literaldummy/hit");
+        goto Spawn;
+    };
+
+    label Crash {
+        DUMM C 3 A_PlaySound("literaldummy/land");
+        goto Spawn;
+    };
+}
