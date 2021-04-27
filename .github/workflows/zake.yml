@@ -1,0 +1,40 @@
+name: Zake Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  assemble:
+    name: Assemble (with ZDCode Zake)
+    #needs: build #-- if you ever define a "build" job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Python 3
+        run: sudo apt install python3 python3-pip
+
+      - name: Setup Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install ZDCode
+        run: |
+          pip install --upgrade --upgrade-strategy eager \
+            git+https://github.com/zeta-group/zdcode
+
+      - name: Run ZDCode
+        run: python3 -m zdcode
+      
+      - name: Upload built packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: zdcode-build
+          path: ${{github.workspace}}/pkg/
