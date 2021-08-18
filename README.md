@@ -5,7 +5,7 @@ This is a template for a ZDoom project that uses
 as a packaging system.
 
 This is more convenient, both for developers, users,
-and for continuous integration alike. Hooray!
+and for continuous integration robots alike. Hooray!
 
 ## Features
 
